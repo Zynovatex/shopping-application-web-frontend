@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
-import { LoginData, loginUser } from "@/app/api/auth/authentication";
+import { LoginData, loginUser } from "@/app/api/auth/authantication";
 import { useRouter } from "next/navigation";
 
 const Login = () => {

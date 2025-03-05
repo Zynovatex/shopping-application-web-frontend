@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { registerUser, RegistrationData } from "@/app/api/auth/authentication";
+import { registerUser, RegistrationData } from "@/app/api/auth/authantication";
 
 const Register = () => {
   const router = useRouter();

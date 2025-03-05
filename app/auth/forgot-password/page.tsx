@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // using next/navigation for client components
-import { requestOtp } from "@/app/api/auth/authentication";
+import { requestOtp } from "@/app/api/auth/authantication";
 
 const RequestOTP = () => {
   const router = useRouter();

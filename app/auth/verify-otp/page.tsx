@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { resetPasswordWithOTP } from "@/app/api/auth/authentication";
+import { resetPasswordWithOTP } from "@/app/api/auth/authantication";
 
 const ResetPassword = () => {
   const router = useRouter();

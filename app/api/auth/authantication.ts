@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "@/cofig/baseUrl";
+import { BASE_URL } from "@/config/baseUrl";
 
 // Create an axios instance with the base URL and default headers
 const apiClient = axios.create({
