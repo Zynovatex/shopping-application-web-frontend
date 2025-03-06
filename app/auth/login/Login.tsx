@@ -79,14 +79,14 @@ function Login() {
               >
                 Email Address
               </label>
-              <div className="relative">
+              <div className="h-14 relative">
                 <input
                   type="email"
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="h-full w-full p-2 border border-gray-300 rounded-xl"
                   placeholder="you@example.com"
                 />
                 {/* 3) Conditionally render the icon if the email is valid & not empty */}
@@ -112,14 +112,16 @@ function Login() {
               >
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full p-2 border border-gray-300 rounded"
-              />
+              <div className="h-14">
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="h-full w-full p-2 border border-gray-300 rounded-xl"
+                />
+              </div>
             </div>
             <div className="flex items-center justify-between text-sm">
               <Link
@@ -136,10 +138,10 @@ function Login() {
               </Link>
             </div>
             {/* Button group */}
-            <div className="flex gap-4">
+            <div className="h-14 flex gap-4">
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-[#5A31F5] text-white rounded"
+                className="h-full w-full px-4 py-2 bg-[#5A31F5] text-white rounded-xl"
               >
                 Login
               </button>
@@ -148,7 +150,7 @@ function Login() {
           <div className="text-center text-sm mt-4 mb-4">Or Login with</div>
           {/* Icon group */}
           <div className="h-23 mt-3 flex justify-between">
-            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded-xl border border-[#000000]">
               <Image
                 src="/Apple.png" // Replace with your actual image path in the public folder
                 alt="Button Image"
@@ -156,7 +158,7 @@ function Login() {
                 height={25} // Set the desired height
               />
             </button>
-            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded-xl border border-[#000000]">
               <Image
                 src="/Google.png" // Replace with your actual image path in the public folder
                 alt="Button Image"
@@ -164,7 +166,7 @@ function Login() {
                 height={25} // Set the desired height
               />
             </button>
-            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded-xl border border-[#000000]">
               <Image
                 src="/Facebook.png" // Replace with your actual image path in the public folder
                 alt="Button Image"
