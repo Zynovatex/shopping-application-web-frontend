@@ -1,0 +1,183 @@
+"use client";
+
+import React, { useState } from "react";
+import { LoginData, loginUser } from "@/app/api/auth/authantication";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+
+function Login() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  // Handle login submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const loginData: LoginData = { email, password };
+
+    try {
+      const result = await loginUser(loginData);
+      setSuccessMessage("Login successful!");
+      setError(null);
+      console.log("Login result:", result);
+      // Redirect upon successful login
+      router.push("/");
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
+      setSuccessMessage(null);
+    }
+  };
+
+  // Redirect to the Forgot Password page.
+  const redirectToForgotPassword = () => {
+    router.push("/auth/forgot-password");
+  };
+
+  // Optionally, a button to redirect to a registration page.
+  const redirectToRegister = () => {
+    router.push("/auth/register");
+  };
+  // Optional: Basic email validation (naive approach).
+  const isValidEmail = (email: string): boolean => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  return (
+    // Container: Flex layout, stacks vertically on small screens, horizontal on md+
+    <div className="flex flex-col md:flex-row min-h-screen">
+      {/* Left side: Image element (hidden on small screens) */}
+      <div className="hidden md:block md:w-1/2">
+        {/* Changed: Added image element with Tailwind styling */}
+        <img
+          src="/loginIllustrater.png" // <-- Change to your actual image path
+          alt="Login Illustration"
+          className="mt-[102px] ml-[173px]"
+          width={688}
+          height={512}
+        />
+      </div>
+
+      {/* Right side: Form container */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6">
+        {/* Wrapper for the form with a max-width */}
+        <div className="w-full max-w-md pr-10">
+          <h1 className="text-3xl font-bold mb-6">LogIn</h1>
+          {error && <p className="text-red-500">{error}</p>}
+          {successMessage && <p className="text-green-500">{successMessage}</p>}
+          {/* Form with Tailwind spacing */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-1 text-sm font-medium text-[#5A31F5]"
+              >
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full p-2 border border-gray-300 rounded"
+                  placeholder="you@example.com"
+                />
+                {/* 3) Conditionally render the icon if the email is valid & not empty */}
+                {email && isValidEmail(email) && (
+                  <div className="absolute inset-y-0 right-3 flex items-center">
+                    {/* Example: A black circle with a white check inside (24x24 viewBox) */}
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="12" fill="black" />
+                      <path
+                        d="M9.5 13.7l-2.2-2.2-.9.9 3.1 3.1 6.1-6.1-.9-.9z"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block mb-1 text-sm font-medium"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <Link
+                href="/auth/register"
+                className="text-[#000000] hover:underline"
+              >
+                Sign Up Now
+              </Link>
+              <Link
+                href="/auth/forgot-password"
+                className="text-[#000000] hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+            {/* Button group */}
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                className="w-full px-4 py-2 bg-[#5A31F5] text-white rounded"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+          <div className="text-center text-sm mt-4 mb-4">Or Login with</div>
+          {/* Icon group */}
+          <div className="h-23 mt-3 flex justify-between">
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+              <Image
+                src="/Apple.png" // Replace with your actual image path in the public folder
+                alt="Button Image"
+                width={25} // Set the desired width
+                height={25} // Set the desired height
+              />
+            </button>
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+              <Image
+                src="/Google.png" // Replace with your actual image path in the public folder
+                alt="Button Image"
+                width={25} // Set the desired width
+                height={25} // Set the desired height
+              />
+            </button>
+            <button className="flex items-center justify-center px-10 py-5 bg-[#fff] text-[#000000] rounded border border-[#000000]">
+              <Image
+                src="/Facebook.png" // Replace with your actual image path in the public folder
+                alt="Button Image"
+                width={25} // Set the desired width
+                height={25} // Set the desired height
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Export at the bottom
+export default Login;
