@@ -11,7 +11,7 @@
 //     </div>
 //   );
 // }*/
-
+import ShopFilter from "@/components/shop/shopFilter";
 //import ShopCard from "@/component/ShopCard";
 import ShopCard from "@/components/shop/shopCard";
 
@@ -90,10 +90,18 @@ const sampleShops = [
 
 export default function Home() {
   return (
+
+<div className="flex">
+      {/* Sidebar for filtering */}
+      <div className="w-1/4 p-6">
+        <ShopFilter />
+      </div>
+
     <div className="flex flex-wrap justify-center gap-6 p-6">
       {sampleShops.map((shop) => (
         <ShopCard key={shop.id} shop={shop} />
       ))}
     </div>
+</div>
   );
 }

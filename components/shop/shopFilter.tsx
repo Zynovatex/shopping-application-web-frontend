@@ -46,7 +46,7 @@ export default function ShopFilter() {
             </div>
 
             {/* Scrollable Filters */}
-            <div className="max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pr-2">
+            <div className="max-h-120 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pr-2">
                 {filterOptions.map((filter, index) => (
                     <div key={index} className="mb-3">
                         {/* Section Header */}
@@ -75,10 +75,10 @@ export default function ShopFilter() {
 
             {/* Buttons */}
             <div className="flex justify-between mt-6">
-                <button className="border border-blue-600 text-blue-600 font-semibold px-4 py-2 rounded-md hover:bg-purple-100 transition">
+                <button className="border border-blue-600 text-blue-600 font-semibold px-2 py-1 rounded-md hover:bg-purple-100 transition">
                     Reset
                 </button>
-                <button className="bg-blue-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                <button className="bg-blue-600 text-white font-semibold px-2 py-1 rounded-md hover:bg-blue-700 transition">
                     Show Result
                 </button>
             </div>
