@@ -22,7 +22,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
 
   return (
     <div
-      className="relative bg-white border border-[#4827c4] rounded-lg shadow-lg w-[256px] h-[249px] overflow-hidden
+      className="relative bg-white border border-[#4827c4] rounded-lg shadow-lg w-[220px] h-[235px] overflow-hidden
         transition-transform duration-300 ease-out hover:scale-105 hover:shadow-2xl"
     >
       {/* Image Section */}

@@ -59,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <span className="font-bold text-sm">{product.name}</span>
           </div>
           <div className="flex items-center font-semibold">
-          <span className={`ml-2 text-[#7b5af7] text-xs flex items-center bg-[#bdadfb] px-3 py-1 rounded-full text-xs font-semibold ${product.isDiscounted ? "visible" : "invisible"}`}>
+          <span className={`ml-2 text-[#7b5af7] text-xs flex items-center bg-[#bdadfb] px-3 py-1 rounded-full font-semibold ${product.isDiscounted ? "visible" : "invisible"}`}>
             -{product.discount}%</span>
             
             <span className="ml-2 text-xs text-[#5A31F5]">Rs {product.price}</span>
