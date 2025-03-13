@@ -35,18 +35,18 @@ export default function ProductFilter() {
     };
 
     return (
-        <div className="w-full max-w-xs md:max-w-sm lg:max-w-md bg-white shadow-lg rounded-lg p-5">
+        <div className="w-full bg-white shadow-lg rounded-lg p-5 flex flex-col">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Filter</h2>
                 <button className="text-blue-600 text-sm font-semibold flex items-center" onClick={toggleExpand}>
-                    {isExpanded ? "collapse all" : "expand all"}
+                    {isExpanded ? "Collapse All" : "Expand All"}
                     {isExpanded ? <FaTimes className="ml-2" /> : <FaChevronDown className="ml-2" />}
                 </button>
             </div>
 
-            {/* Scrollable Filters */}
-            <div className="max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pr-2">
+            {/* Full Height Filters */}
+            <div className="flex-grow">
                 {filterOptions.map((filter, index) => (
                     <div key={index} className="mb-3">
                         {/* Section Header */}
@@ -63,28 +63,44 @@ export default function ProductFilter() {
                             <div className="mt-2 space-y-2 pl-4">
                                 {filter.title === "Price & Discount" ? (
                                     // Price Range Slider
-                                    <div className="pt-2">
-                                        <Range
-                                            step={100}
-                                            min={1000}
-                                            max={50000}
-                                            values={priceRange}
-                                            onChange={(values) => setPriceRange(values)}
-                                            renderTrack={({ props, children }) => (
-                                                <div {...props} className="w-full h-2 bg-gray-300 rounded-md relative">
-                                                    {children}
-                                                </div>
-                                            )}
-                                            renderThumb={({ props }) => (
-                                                <div {...props} className="w-4 h-4 bg-blue-600 rounded-full shadow-md cursor-pointer" />
-                                            )}
-                                            
-                                        />
-                                        <div className="flex justify-between text-xs text-gray-600 mt-2">
-                                            <span>Rs.{priceRange[0].toLocaleString()}</span>
-                                            <span>Rs.{priceRange[1].toLocaleString()}</span>
-                                        </div>
-                                    </div>
+                                    // Price Range Slider
+<div className="pt-2">
+    <Range
+        step={100}
+        min={1000}
+        max={50000}
+        values={priceRange}
+        onChange={(values) => setPriceRange(values)}
+        renderTrack={({ props, children }) => {
+            const min = 1000;
+            const max = 50000;
+            const left = ((priceRange[0] - min) / (max - min)) * 100;
+            const right = ((priceRange[1] - min) / (max - min)) * 100;
+
+            return (
+                <div {...props} className="w-full h-2 bg-gray-300 rounded-md relative">
+                    {/* Active range (blue line) */}
+                    <div
+                        className="absolute h-2 bg-blue-600 rounded-md"
+                        style={{
+                            left: `${left}%`,
+                            right: `${100 - right}%`,
+                        }}
+                    />
+                    {children}
+                </div>
+            );
+        }}
+        renderThumb={({ props }) => (
+            <div {...props} className="w-4 h-4 bg-blue-600 rounded-full shadow-md cursor-pointer" />
+        )}
+    />
+    <div className="flex justify-between text-xs text-gray-600 mt-2">
+        <span>Rs.{priceRange[0].toLocaleString()}</span>
+        <span>Rs.{priceRange[1].toLocaleString()}</span>
+    </div>
+</div>
+
                                 ) : (
                                     // Normal Checkbox Filters
                                     filter.options.map((option, idx) => (
@@ -101,7 +117,7 @@ export default function ProductFilter() {
             </div>
 
             {/* Buttons */}
-            <div className="flex justify-between mt-6">
+            <div className="mt-6 flex justify-between">
                 <button className="border border-blue-600 text-blue-600 font-semibold px-4 py-2 rounded-md hover:bg-blue-100 transition">
                     Reset
                 </button>

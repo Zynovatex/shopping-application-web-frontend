@@ -84,7 +84,7 @@ export default function ShopListingPage() {
               <ShopCard key={index} shop={shop} />
             ))}
           </div>
-          <div className="mt-12 flex justify-center">
+          <div className="mt-12 flex justify-center mr-32">
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
           </div>
         </main>

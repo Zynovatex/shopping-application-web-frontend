@@ -46,7 +46,7 @@ export default function ShopFilter() {
             </button>
 
             {/* Sidebar Filter */}
-            <div className={`w-full h-auto max-w-xs md:max-w-sm lg:max-w-md bg-white shadow-lg rounded-lg p-5 ${isMobileFilterOpen ? 'fixed inset-0 z-50 w-full h-full bg-white' : 'hidden lg:block'}`}>
+            <div className={`w-full h-auto max-w-xs md:max-w-sm lg:max-w-md bg-white shadow-lg rounded-lg p-5 ${isMobileFilterOpen ? 'fixed inset-0 z-50 w-full bg-white' : 'hidden lg:block'}`}>
                 {/* Mobile Close Button */}
                 {isMobileFilterOpen && (
                     <button className="absolute top-4 right-4 text-gray-600 text-xl" onClick={() => setIsMobileFilterOpen(false)}>
