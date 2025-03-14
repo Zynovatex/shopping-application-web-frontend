@@ -25,6 +25,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
   const [isAdd, setIsAdd] = useState(product.isAdd);
+  
   return (
     <div
       className="relative bg-white  rounded-lg shadow-lg w-[246px] h-[270px] overflow-hidden
@@ -70,12 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex justify-between items-center mt-2 ">
         <div className="flex items-center space-x-1">  
         <span className={` flex items-Left ${product.isFreeDelivery ? "visible" : "invisible"}`}>
-        <Image
-      src="/shopcard/iconn.png"
-      alt="Custom Icon"
-      width={30} 
-      height={25}
-    /> </span>
+       </span>
         
           <span className={`text-red-600 text-[9px] font-semibold italic flex items-Left ${product.isBestSeller ? "visible" : "invisible"}`}>Best Seller</span>
            </div>
