@@ -1,13 +1,17 @@
-import Image from "next/image";
-import { AppleOutlined } from "@ant-design/icons";
+import React from "react";
+import Link from "next/link";
 
-export default function Home() {
+function HomePage() {
   return (
-    <>
-      <h1>This is the Kasun's Development Branch</h1>
-      <div className="flex items-center">
-        <AppleOutlined className="text-6xl" />
-      </div>
-    </>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 className="text-4xl font-bold mb-8">HOME</h1>
+      <Link href="/shop-registrations">
+        <button className="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors">
+          Register Shop
+        </button>
+      </Link>
+    </div>
   );
 }
+
+export default HomePage;
