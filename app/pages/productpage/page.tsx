@@ -270,7 +270,40 @@ const [selectedSize, setSelectedSize] = useState(sizes[0]);
     </div>
   </div>
 
+   <div className="w-full max-w-[1200px] mx-auto mt-10 border-t border-gray-300 pt-6">
+         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+           
+   
+           
+           {/* Payment Methods Section */}
+           <div className="text-center md:text-left">
+             
+             <h2 className="text-xl font-bold text-gray-800 mb-3">Secure & Convenient Payment Methods</h2>
+   
+   
+              {/* Payment Methods Image */}
+           <div className="flex justify-center md:justify-start items-center gap-4">
+             <Image 
+               src="/paymentMethod.jpg" 
+               alt="Payment Methods" 
+               width={400} 
+               height={100} 
+               className="max-w-full h-auto"
+             />
+   
+             <p className="text-gray-600 text-sm align-middle text-justify mt-2 items-center">
+             We offer multiple payment options, including Credit/Debit Cards, Digital Wallets and Bank Transfers, ensuring a smooth and hassle-free shopping experience. Our platform supports Visa, Mastercard, American Express, and other local payment methods to provide seamless transactions.
+             For high-value purchases, you can take advantage of Easy Monthly Installments (EMI), making payments more manageable. Additionally, we offer reward points on select payment methods, allowing you to save more on future purchases.
+             To ensure the highest level of security, all transactions are PCI DSS compliant, protecting your financial data with advanced encryption and fraud prevention measures.
+             </p>
+           </div>
+   
+           </div>
+         </div>
+       </div>
+  
     </div>
+
   );
 };
 

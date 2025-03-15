@@ -49,7 +49,7 @@ const ProductReview = () => {
   return (
     <div className="mt-6 space-y-6">
       {reviews.map((review, index) => (
-        <div key={index} className="border p-4 rounded-md shadow-md">
+        <div key={index} className="border p-4 rounded-md bg-blue-50 shadow-md">
           <p className="font-semibold">{review.name}</p>
           <p className="text-yellow-500">{review.rating}</p>
           <p className="text-gray-700">{review.review}</p>
