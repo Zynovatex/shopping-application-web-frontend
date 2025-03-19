@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa"; // Favorite icons
 import Image from "next/image";
+import { useRouter } from "next/navigation"; 
+
 
 interface ShopCardProps {
   shop: {
@@ -17,13 +19,22 @@ interface ShopCardProps {
   };
 }
 
+
 const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
   const [isFavorite, setIsFavorite] = useState(shop.isFavorite);
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    // router.push(`/shop/${shop.id}`); // Navigate to shop page when clicking the card
+    router.push("/pages/shoppage");
+  };
+
 
   return (
     <div
       className="relative bg-white border border-[#4827c4] rounded-lg shadow-lg w-[220px] h-[235px] overflow-hidden
         transition-transform duration-300 ease-out hover:scale-105 hover:shadow-2xl"
+        onClick={handleCardClick} // Navigate to shop page on card click
     >
       {/* Image Section */}
       <div className="relative w-full h-[170px]">
@@ -38,7 +49,11 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
         {/* Favorite Button */}
         <div
           className="absolute top-3 right-3 bg-white p-2 rounded-full cursor-pointer shadow-md transition-transform duration-300 hover:scale-110"
-          onClick={() => setIsFavorite(!isFavorite)}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevents navigation when clicking the favorite button
+            setIsFavorite(!isFavorite);
+          }}
+
         >
           {isFavorite ? (
             <FaHeart className="text-red-500" size={18} />

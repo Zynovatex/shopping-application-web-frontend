@@ -5,6 +5,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaCartPlus, FaShoppingCart } from "react-icons/fa"; 
 import { FaTruck } from "react-icons/fa"; // Free Shipping Icon
 import Image from "next/image";
+import { useRouter } from "next/navigation"; 
+
 
 interface ProductCardProps {
   product: {
@@ -28,6 +30,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isAdd, setIsAdd] = useState(product.isAdd);
   const [isHovered, setIsHovered] = useState(false);
 
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    // router.push(`/shop/${shop.id}`); // Navigate to shop page when clicking the card
+    router.push("/pages/productpage");
+  };
+
   return (
     <div
       className={`relative bg-white rounded-lg w-[246px] h-[270px] overflow-hidden transition-all duration-300 ease-out
@@ -36,7 +45,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick} // Navigate to shop page on card click
     >
+      
       
       {/* Product Image Section */}
       <div className="relative w-full h-[150px]">

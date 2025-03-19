@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import ShopCard from '@/components/shop/shopCard';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+
 
 type BannerPosition = "top-left" | "top-right" | "center" | "bottom-right" | "top-center";
 
@@ -68,6 +70,9 @@ const categories = [
   ];
 
 export default function LandingPage() {
+
+  const router = useRouter();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -145,6 +150,7 @@ export default function LandingPage() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5, delay: 1 }}
+                    onClick={() => router.push("/pages/shoplistpage")}
                   >
                     Shop Now →
                   </motion.button>
