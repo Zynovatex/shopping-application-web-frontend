@@ -198,7 +198,6 @@ const ShopRegistrationPage: React.FC = () => {
           </div>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

@@ -191,9 +191,6 @@ function Login() {
           </div>
         </div>
       </div>
-
-      {/* --- NEW: Footer is placed at the bottom of the page --- */}
-      <Footer />
     </div>
   );
 }
