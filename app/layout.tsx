@@ -27,14 +27,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {" "}
-        <div className="flex flex-col min-h-screen">
-          <main className="flex-grow">{children}</main>
-          {/* ✅ Add Footer Below the Main Content */}
-        </div>
-        <Footer />
+      > <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">{children}</main>
+      {/* ✅ Add Footer Below the Main Content */}
+    </div>
+    <Footer /> 
       </body>
+   
     </html>
   );
 }
