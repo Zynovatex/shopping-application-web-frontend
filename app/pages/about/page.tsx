@@ -12,10 +12,10 @@ export default function AboutPage() {
 <section className="mt-10 flex flex-col lg:flex-row items-center gap-10">
     {/* Left: Text Content */}
     <div className="w-full lg:w-1/2">
-        <h1 className="text-4xl font-bold text-black">Srilank's First VirtualCity Platform</h1>
+        <h1 className="text-4xl font-bold text-black"> Sri Lanka’s First VirtualCity Platform</h1>
         <p className="text-gray-600 mt-4 text-justify">
         VirtualCity is a next-generation digital marketplace designed to seamlessly connect businesses and consumers in Sri Lanka. Our platform offers a fully interactive virtual experience, enabling users to discover top-rated businesses, explore digital storefronts, and engage in secure transactions—all in one place.
-        With a focus on innovation, accessibility, and user convenience, VirtualCity empowers businesses to expand their online presence while providing consumers with a smooth and hassle-free shopping experience. Whether you're a seller looking to showcase your products or a buyer searching for trusted services, VirtualCity ensures a smart, efficient, and engaging virtual ecosystem.
+        With a focus on innovation, accessibility, and user convenience, VirtualCity empowers businesses to expand their online presence while providing consumers with a smooth and hassle-free shopping experience. Whether you are a seller looking to showcase your products or a buyer searching for trusted services, VirtualCity ensures a smart, efficient, and engaging virtual ecosystem.
         Join us in shaping the future of Sri Lanka’s digital commerce and online business landscape.
         </p>
     </div>
