@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import ProductCard from '@/components/product/productCard';
 import ProductFilter from '@/components/product/productFilter';
-import Pagination from '@/components/layout/Pagination';
+import Pagination from '@/app/component/layout/Pagination';
 import { FaFilter, FaTimes, FaStar } from 'react-icons/fa';
 import Image from 'next/image';
 import { motion } from 'framer-motion';

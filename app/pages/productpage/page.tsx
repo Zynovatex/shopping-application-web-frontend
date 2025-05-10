@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Truck, ChevronLeft, ChevronRight } from "lucide-react";
-import ProductReview from "@/components/product/productReview";
-import ProductCard from "@/components/product/productCard";
+import ProductReview from "@/app/component/product/productReview";
+import ProductCard from "@/app/component/product/productCard";
+
 
 const productImages = [
   "/product1/product1.2.jpg",

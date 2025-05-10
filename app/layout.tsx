@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./component/layout/Footer";
 import TopHeader from "./component/layout/TopHeader";
+import Header from "./component/layout/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +27,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <div className="flex flex-col min-h-screen">
-        {/* ✅ Add TopHeader at the top */}
-        <TopHeader />
-        
-        {/* ✅ Main Content Area */}
-        <main className="flex-grow">{children}</main>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="flex flex-col min-h-screen">
+          {/* ✅ Top mini header (e.g., for language, contact, etc.) */}
+          <TopHeader />
   
-        {/* ✅ Footer at the bottom */}
-        <Footer />
-      </div>
-    </body>
-  </html>
+          {/* ✅ Main Site Header with Logo, Search, Nav */}
+          <Header />
   
+          {/* ✅ Main Content Area */}
+          <main className="flex-grow">{children}</main>
+  
+          {/* ✅ Footer at the bottom */}
+          <Footer />
+        </div>
+      </body>
+    </html>
   );
+  
+  
+  
 }

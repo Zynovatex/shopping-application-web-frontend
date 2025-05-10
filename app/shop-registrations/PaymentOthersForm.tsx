@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { uploadFileToFirebase } from "../api/auth/firebaseUpload";
@@ -25,7 +26,7 @@ const PaymentOthersForm: React.FC<PaymentOthersFormProps> = ({
 
   const handleMultipleUpload = async (files: File[]) => {
     const uploadedURLs: string[] = [];
-    for (let file of files) {
+    for (const file of files) {
       const url = await uploadFileToFirebase(file, "shopAdditionalPhotos");
       uploadedURLs.push(url);
     }

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import ShopCard from '@/components/shop/shopCard';
 import ShopFilter from '@/components/shop/shopFilter';
-import Pagination from '@/components/layout/Pagination';
+import Pagination from '@/app/component/layout/Pagination';
 import { FaFilter, FaTimes } from 'react-icons/fa';
 
 const ITEMS_PER_PAGE = 24;

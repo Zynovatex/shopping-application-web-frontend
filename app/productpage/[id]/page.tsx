@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Truck, ChevronLeft, ChevronRight } from "lucide-react";
 import ProductReview from "../../component/product/productReview";
 import ProductCard from "../../component/product/productCard";
+
 import {
   fetchProductById,
   fetchRelatedProducts,
@@ -87,11 +88,13 @@ const ProductPage = () => {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product.id, product.productName, product.price, quantity)
-        .then((data) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .then((_data) => {
           setPopupMessage("Product successfully added to the cart!");
           setShowPopup(true);
         })
-        .catch((err) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .catch((_err) => {
           setPopupMessage("Failed to add product to cart.");
           setShowPopup(true);
         });

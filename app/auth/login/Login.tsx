@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 // --- NEW: Import the Footer component ---
-import Footer from "@/app/component/layout/Footer";
 
 function Login() {
   const router = useRouter();
@@ -40,7 +39,9 @@ function Login() {
 
       // Redirect upon successful login
       router.push("/");
-    } catch (err: any) {
+ 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err:any) {
       // Display error message if login fails
       setError(
         err.response?.data?.message || "Login failed. Please try again."
@@ -50,14 +51,14 @@ function Login() {
   };
 
   // Redirect to the Forgot Password page.
-  const redirectToForgotPassword = () => {
-    router.push("/auth/forgot-password");
-  };
+  // const redirectToForgotPassword = () => {
+  //   router.push("/auth/forgot-password");
+  // };
 
   // Optionally, a button to redirect to a registration page.
-  const redirectToRegister = () => {
-    router.push("/auth/register");
-  };
+  // const redirectToRegister = () => {
+  //   router.push("/auth/register");
+  // };
 
   // Optional: Basic email validation (naive approach).
   const isValidEmail = (email: string): boolean => {
