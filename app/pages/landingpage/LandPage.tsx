@@ -5,6 +5,7 @@ import Image from "next/image";
 import ShopCard from "@/app/component/shop/shopCard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import shopService, { ShopResponse } from "@/app/api/auth/shopService";
 
 type BannerPosition =
   | "top-left"
@@ -22,28 +23,28 @@ const banners: {
 }[] = [
   {
     id: 1,
-    image: "/landingpage/banner3.jpg", // Replace with your image paths
+    image: "/landingpage/banner3.png", // Replace with your image paths
     title: "Borem Ipsum Dolor Sit Amet",
     description: "",
     position: "top-center",
   },
   {
     id: 2,
-    image: "/landingpage/banner8.jpg",
+    image: "/landingpage/banner4.png",
     title: "Borem Ipsum Dolor Sit Amet, Consectetur",
     description: "Jorem ipsum dolor sit amet, consectetur adipiscing elit.",
     position: "top-right",
   },
   {
     id: 3,
-    image: "/landingpage/banner5.jpg",
+    image: "/landingpage/banner2.png",
     title: "Discover Amazing Deals",
     description: "Shop the best products at unbeatable prices!",
     position: "top-left",
   },
   {
     id: 4,
-    image: "/landingpage/banner2.jpg",
+    image: "/landingpage/banner1.png",
     title: "Upgrade Your Lifestyle",
     description: "Latest trends and top-quality items just for you.",
     position: "center",
@@ -61,145 +62,87 @@ const positionStyles = {
 
 const categories = [
   {
-    image: "/categories_Landingpage/fruit&vegi.jpg",
+    image: "/landingpage/Fruits and vegetables.png",
     name: "Fruit & Vegitables",
   },
   {
-    image: "/categories_Landingpage/Bakery & Snacks.jpg",
+    image: "/landingpage/Bakery & Snacks.png",
     name: "Bakery & Snacks",
   },
   {
-    image: "/categories_Landingpage/personal care & hygiene.jpg",
+    image: "/landingpage/personal care & hygiene.png",
     name: "Personal care & Hygiene",
   },
-  { image: "/categories_Landingpage/clothes.jpg", name: "clothes" },
+  { image: "/landingpage/clothes.png", name: "Clothes" },
   {
-    image: "/categories_Landingpage/household essentials.jpg",
+    image: "/landingpage/household essentials.png",
     name: "Household essentials",
   },
   {
-    image: "/categories_Landingpage/electronics Item.jpg",
+    image: "/landingpage/electronics Item.png",
     name: "Electronics items",
-  },
-];
-
-const shopsData = [
-  {
-    id: 1,
-    name: "Bakery Delight",
-    image: "/shop/shop1.jpg",
-    category: "Bakery",
-    rating: 4.5,
-    isOpen: true,
-    isTopRated: true,
-    isFavorite: false,
-  },
-  {
-    id: 2,
-    name: "Fresh Mart",
-    image: "/shop/shop2.jpg",
-    category: "Grocery",
-    rating: 4.2,
-    isOpen: false,
-    isTopRated: true,
-    isFavorite: true,
-  },
-  {
-    id: 3,
-    name: "Organic Hub",
-    image: "/shop/shop3.jpg",
-    category: "Organic",
-    rating: 4.8,
-    isOpen: true,
-    isTopRated: true,
-    isFavorite: false,
-  },
-  {
-    id: 4,
-    name: "Daily Essentials",
-    image: "/shop/shop4.jpg",
-    category: "Supermarket",
-    rating: 4.0,
-    isOpen: true,
-    isTopRated: true,
-    isFavorite: true,
-  },
-  {
-    id: 5,
-    name: "Local Market",
-    image: "/shop/shop5.jpg",
-    category: "Grocery",
-    rating: 4.3,
-    isOpen: false,
-    isTopRated: true,
-    isFavorite: false,
-  },
-  {
-    id: 6,
-    name: "Tasty Bites",
-    image: "/shop/shop6.jpg",
-    category: "Bakery",
-    rating: 4.7,
-    isOpen: true,
-    isTopRated: true,
-    isFavorite: true,
-  },
-  {
-    id: 7,
-    name: "Quick Grocery",
-    image: "/shop/shop7.jpg",
-    category: "Supermarket",
-    rating: 4.1,
-    isOpen: false,
-    isTopRated: true,
-    isFavorite: false,
-  },
-  {
-    id: 1,
-    name: "Bakery Delight",
-    image: "/shop/shop1.jpg",
-    category: "Bakery",
-    rating: 4.5,
-    isOpen: true,
-    isTopRated: true,
-    isFavorite: false,
   },
 ];
 
 export default function LandingPage() {
   const router = useRouter();
 
+  // === New: state for fetched shops + loading flag ===
+  const [shops, setShops] = useState<ShopResponse[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // === Carousel state (unchanged) ===
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  const allTopRatedShops = shopsData.filter((shop) => shop.isTopRated);
-
+  // === Shops slider state ===
   const [startIndex, setStartIndex] = useState(0);
-  const visibleShops = 5; // Default number of shops displayed
-  const totalShops = allTopRatedShops.length; // Total number of top-rated shops
+  const visibleShops = 5;
 
-  const nextShops = () => {
-    if (startIndex + visibleShops < totalShops) {
-      setStartIndex(startIndex + 1); // Move right by 1 shop
-    }
-  };
+  // === Fetch shops on mount ===
+  useEffect(() => {
+    shopService
+      .getAllShops()
+      .then((data) => {
+        setShops(data);
+      })
+      .catch((err) => {
+        console.error("Failed to load shops:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-  const prevShops = () => {
-    if (startIndex > 0) {
-      setStartIndex(startIndex - 1); // Move left by 1 shop
-    }
-  };
-
+  // === Banner auto-rotate (unchanged) ===
   useEffect(() => {
     const interval = setInterval(() => {
       setIsFirstLoad(false);
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+      setCurrentIndex((prev) => (prev + 1) % banners.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
+  // === Handlers for shop slider ===
+  const nextShops = () => {
+    if (startIndex + visibleShops < shops.length) {
+      setStartIndex(startIndex + 1);
+    }
+  };
+  const prevShops = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    }
+  };
+
+  // === Show loading state if still fetching ===
+  if (loading) {
+    return <div className="text-center mt-20">Loading shops…</div>;
+  }
+
   return (
     <div>
+      {/* ===== Banner section (exactly as before) ===== */}
       <div className="relative rounded-3xl w-full max-w-[1400px] h-[350px] overflow-hidden mx-auto mt-10">
         <AnimatePresence>
           {banners.map((banner, index) =>
@@ -274,6 +217,7 @@ export default function LandingPage() {
         </div>
       </div>
 
+      {/* ===== Categories section (unchanged) ===== */}
       <div className="mt-16 px-8 max-w-[1400px] mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-gray-800">Categories</h2>
@@ -307,11 +251,10 @@ export default function LandingPage() {
         </div>
       </div>
 
+      {/* ===== Top Rated Shops (now dynamic) ===== */}
       <div className="relative mt-12 mb-12 mx-auto max-w-[1400px]">
         <h2 className="text-3xl font-bold mb-8 ml-10">Top Rated Shops</h2>
-
         <div className="flex items-center ml-10">
-          {/* Left Button */}
           <button
             onClick={prevShops}
             disabled={startIndex === 0}
@@ -320,19 +263,15 @@ export default function LandingPage() {
             <ChevronLeftIcon className="h-6 w-6 text-gray-700" />
           </button>
 
-          {/* Shops Display (Single Line) */}
-          <div className="flex overflow-hidden gap-10 mx-4">
-            {allTopRatedShops
-              .slice(startIndex, startIndex + visibleShops)
-              .map((shop) => (
-                <ShopCard key={shop.id} shop={shop} />
-              ))}
+          <div className="flex gap-10 mx-4">
+            {shops.slice(startIndex, startIndex + visibleShops).map((shop) => (
+              <ShopCard key={shop.id} shop={shop} />
+            ))}
           </div>
 
-          {/* Right Button */}
           <button
             onClick={nextShops}
-            disabled={startIndex + visibleShops >= totalShops}
+            disabled={startIndex + visibleShops >= shops.length}
             className="bg-white shadow-lg rounded-full p-2 disabled:opacity-50"
           >
             <ChevronRightIcon className="h-6 w-6 text-gray-600" />

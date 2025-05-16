@@ -4,7 +4,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     // Whitelist the Firebase Storage host so next/image can optimize these URLs
-    domains: ["firebasestorage.googleapis.com", "firebase-link.com"],
+    domains: [
+      "firebasestorage.googleapis.com",
+      "firebase-link.com",
+      "example.com",
+    ],
   },
 };
 

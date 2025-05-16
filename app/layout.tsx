@@ -1,7 +1,11 @@
+// app/layout.tsx (or wherever your RootLayout lives)
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./component/layout/Footer";
+import TopHeader from "./component/layout/TopHeader";
+import Header from "./component/layout/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +32,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {" "}
         <div className="flex flex-col min-h-screen">
+          {/* ─── Sticky Header Wrapper ─── */}
+          <div className="sticky top-0 z-50 bg-white shadow-sm">
+            {/* Top mini header */}
+            <TopHeader />
+            {/* Main Site Header */}
+            <Header />
+          </div>
+
+          {/* Main Content (will scroll under the sticky headers) */}
           <main className="flex-grow">{children}</main>
-          {/* ✅ Add Footer Below the Main Content */}
+
+          {/* Footer at the bottom */}
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

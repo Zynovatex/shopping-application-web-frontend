@@ -11,6 +11,7 @@ import {
   ProductResponse,
 } from "../../api/auth/productService";
 import { addToCart } from "@/app/api/auth/cartService";
+import Link from "next/link";
 
 const ProductPage = () => {
   const params = useParams();
@@ -254,9 +255,14 @@ const ProductPage = () => {
             </div>
 
             <div className="mt-6">
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-lg mr-2 transition-colors duration-300 hover:bg-blue-700 active:bg-blue-800">
-                Buy Now
-              </button>
+              <Link href={"/cart"}>
+                <button
+                  className="bg-blue-500 text-white px-6 py-2 rounded-lg mr-2 transition-colors duration-300 hover:bg-blue-700 active:bg-blue-800"
+                  onClick={handleAddToCart}
+                >
+                  Buy Now
+                </button>
+              </Link>
               <button
                 className="bg-gray-300 px-6 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-500 active:bg-gray-200"
                 onClick={handleAddToCart} // Attach the function to Add to Cart
@@ -332,22 +338,6 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Popup Card */}
-      {/* {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-            <h3 className="text-lg font-bold">Order Confirmation</h3>
-            <p className="mt-2">Your order has been placed successfully!</p>
-            <button
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
-              onClick={() => setShowPopup(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
 
       {/* Related Products Section */}
       <div className="mt-16 text-center">
