@@ -5,9 +5,11 @@ import Link from "next/link";
 import LocationSelector from "@/app/component/layout/LocationSelector";
 import ProfileMenu from "@/app/component/layout/ProfileMenu";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const [open, setOpen] = useState(false); // State to manage dropdown menu visibility
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-3 shadow-sm border-b bg-blue-30">
@@ -19,34 +21,31 @@ const Header = () => {
             <span className="text-black">City</span>
           </span>
         </Link>
-        <nav className="hidden md:flex gap-4 text-gray-700 text-base font-medium">
-          <Link
-            href="/pages/landingpage"
-            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-          >
-            Home
-          </Link>
-          <Link
-            href="/pages/about"
-            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-          >
-            About
-          </Link>
-          <Link
-            href="/pages/blog"
-            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/pages/contact"
-            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-          >
-            Contact
-          </Link>
+
+        <nav className="hidden md:flex gap-4 text-base font-medium">
+          {[
+            { href: "/pages/landingpage", label: "Home" },
+            { href: "/pages/about", label: "About" },
+            { href: "/pages/blog", label: "Blog" },
+            { href: "/pages/contact", label: "Contact" },
+          ].map(({ href, label }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`px-4 py-2 rounded-full  font-medium transition ${
+                  isActive
+                    ? "bg-gray-100 text-gray-700 "
+                    : "bg-white text-blue-800  hover:bg-gray-100"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
-
       {/* Search */}
       <div className="flex items-center gap-4 flex-grow max-w-md mx-auto">
         <input
