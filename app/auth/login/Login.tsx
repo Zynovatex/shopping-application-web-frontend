@@ -4,7 +4,7 @@ import { LoginData, loginUser } from "@/app/api/auth/authantication";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-// --- NEW: Import the Footer component ---
+
 
 function Login() {
   const router = useRouter();
@@ -37,6 +37,7 @@ function Login() {
       setError(null);
       console.log("Login result:", result);
 
+       
       // Redirect upon successful login
       router.push("/");
  

@@ -1,12 +1,5 @@
-import { 
-    FaTiktok, 
-    FaFacebookF, 
-    FaLinkedinIn, 
-    FaInstagram, 
-    FaPinterestP, 
-    FaGlobe 
-  } from "react-icons/fa";
-  import { FaXTwitter } from "react-icons/fa6";
+import { FaTiktok, FaFacebookF, FaLinkedinIn, FaInstagram, FaPinterestP, FaGlobe } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
   
   const footerLinks = [
     {

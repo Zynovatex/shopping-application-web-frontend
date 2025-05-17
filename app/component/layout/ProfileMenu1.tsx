@@ -2,10 +2,10 @@
 
 import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogIn } from 'lucide-react'; // ✅ Import icons
+import { LogIn } from 'lucide-react'; 
 import Link from "next/link";
 
-// ✅ Props type
+//  Props type
 interface Props {
   open: boolean;
   setOpen: (value: boolean) => void;

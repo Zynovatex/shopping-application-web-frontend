@@ -1,12 +1,13 @@
-'use client';
-import { useState } from 'react';
-import { FaSearch, FaShoppingCart, FaHeart } from 'react-icons/fa';
-import Link from 'next/link';
-import LocationSelector from './LocationSelector'; 
-import ProfileMenu1 from './ProfileMenu1';
+"use client";
+import { useState } from "react";
+import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
+import Link from "next/link";
+import LocationSelector from "@/app/component/layout/LocationSelector";
+import ProfileMenu1 from "@/app/component/layout/ProfileMenu1";
+import { FaUser } from "react-icons/fa";
 
 const Header = () => {
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-3 shadow-sm border-b bg-blue-30">
@@ -14,18 +15,36 @@ const Header = () => {
       <div className="flex items-center gap-8">
         <Link href="/pages/landingpage">
           <span className="text-3xl font-bold flex items-center px-2">
-          
             <span className="text-blue-700">Virtual</span>
             <span className="text-black">City</span>
           </span>
         </Link>
         <nav className="hidden md:flex gap-4 text-gray-700 text-base font-medium">
-        <Link href="/pages/landingpage" className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200">Home</Link>
-        <Link href="/pages/about" className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200">About</Link>
-        <Link href="/pages/blog" className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200">Blog</Link>
-        <Link href="/pages/contact" className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200">Contact</Link>
+          <Link
+            href="/pages/landingpage"
+            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          >
+            Home
+          </Link>
+          <Link
+            href="/pages/about"
+            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          >
+            About
+          </Link>
+          <Link
+            href="/pages/blog"
+            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/pages/contact"
+            className="px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          >
+            Contact
+          </Link>
         </nav>
-
       </div>
 
       {/* Search */}
@@ -42,51 +61,56 @@ const Header = () => {
 
       {/* Right Side */}
       <div className="flex items-center gap-10">
-  {/* Location Button */}
-  <LocationSelector />
+        {/* Location Button */}
+        <LocationSelector />
 
-  {/* Icons */}
-<div className="flex items-center gap-8 text-gray-700">
-  {/* Cart */}
-  <div className="relative flex items-center  hover:text-blue-600">
-    <button
-      onClick={() => console.log('Cart icon clicked')}
-      className="flex items-center focus:outline-none"
-    >
-      <FaShoppingCart />
+        {/* Icons */}
+        <div className="flex items-center gap-8 text-gray-700">
+          {/* Cart */}
+          <div className="relative flex items-center  hover:text-blue-600">
+            <button
+              onClick={() => console.log("Cart icon clicked")}
+              className="flex items-center focus:outline-none"
+            >
+              <FaShoppingCart />
+            </button>
+          </div>
 
-    </button>
-  </div>
-
-  {/* Favorites */}
-  <div className="relative flex items-center  hover:text-red-600">
-    <button
-      onClick={() => console.log('Favorites icon clicked')}
-      className="flex items-center focus:outline-none"
-    >
-      <FaHeart />
-    </button>
-  </div>
-</div>
-
-
+          {/* Favorites */}
+          <div className="relative flex items-center  hover:text-red-600">
+            <button
+              onClick={() => console.log("Favorites icon clicked")}
+              className="flex items-center focus:outline-none"
+            >
+              <FaHeart />
+            </button>
+          </div>
+        </div>
 
         {/* Profile */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => setOpen(!open)}>
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => setOpen(!open)}
+        >
           <div className="flex items-center gap-2">
-          {/* Your profile dropdown menu */}
-           <ProfileMenu1 open={open} setOpen={setOpen} />
-        
+            {/* Your profile dropdown menu */}
+            <ProfileMenu1 open={open} setOpen={setOpen} />
+          <div className="flex items-center gap-2">
+           {/* Icon */}
+           <FaUser className="text-xl text-black" />
+
             {/* Text */}
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold text-black hover:underline hover:text-blue-600">Sign in / Register </span>
+              <span className="text-sm font-semibold text-black hover:underline hover:text-blue-600">
+                Sign in / Register{" "}
+              </span>
             </div>
           </div>
-        
         </div>
-        </div>
+      </div>
+     </div>
     </header>
   );
 };
 
-export default Header; 
+export default Header;

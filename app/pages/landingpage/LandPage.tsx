@@ -23,27 +23,27 @@ const banners: {
   {
     id: 1,
     image: "/landingpage/banner3.jpg", // Replace with your image paths
-    title: "Borem Ipsum Dolor Sit Amet",
-    description: "",
+    title: "Discover Amazing Dealst",
+    description: "Shop the best products at unbeatable prices!",
     position: "top-center",
   },
   {
     id: 2,
     image: "/landingpage/banner8.jpg",
-    title: "Borem Ipsum Dolor Sit Amet, Consectetur",
-    description: "Jorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    title: "Discover Amazing Deals",
+    description: "Shop the best products at unbeatable prices!",
     position: "top-right",
   },
   {
     id: 3,
-    image: "/landingpage/banner5.jpg",
+    image: "/landingpage/banner2.png",
     title: "Discover Amazing Deals",
     description: "Shop the best products at unbeatable prices!",
     position: "top-left",
   },
   {
     id: 4,
-    image: "/landingpage/banner2.jpg",
+    image: "/landingpage/banner5.png",
     title: "Upgrade Your Lifestyle",
     description: "Latest trends and top-quality items just for you.",
     position: "center",

@@ -13,7 +13,7 @@ interface ProfileFormProps {
   profilePicture: string | undefined;
 
   // Handlers
-  onChange: (field: string, value: any) => void;
+  onChange: (field: string, value: unknown) => void;
   onNext: () => void;
 }
 

@@ -8,7 +8,7 @@ interface PaymentOthersFormProps {
   onlinePayment: boolean;
   mobilePayment: boolean;
   additionalPhotos: string[];
-  onChange: (field: string, value: any) => void;
+  onChange: (field: string, value: unknown) => void;
   onSave: () => void; // final save
   onBack: () => void;
 }
