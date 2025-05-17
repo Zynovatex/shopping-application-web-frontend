@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { IoClose } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
+  const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
@@ -60,11 +63,20 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4 py-8">
-      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-3xl">
-        {/* Page Title */}
+      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-3xl relative">
+        {/* ❌ Close Button */}
+        <button
+          onClick={() => router.back()}
+          className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition"
+          aria-label="Close"
+        >
+          <IoClose size={24} />
+        </button>
+
+        {/* Title */}
         <h2 className="text-3xl font-bold text-blue-800 text-center mb-4">Personal Info</h2>
 
-        {/* Image Upload - at Top */}
+        {/* Image Upload */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-300 mb-2">
             {imagePreview ? (
@@ -88,7 +100,7 @@ const ProfilePage = () => {
           />
         </div>
 
-        {/* Form Fields */}
+        {/* Form */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
             <label className="block text-sm font-medium text-blue-700 mb-1">First Name</label>
