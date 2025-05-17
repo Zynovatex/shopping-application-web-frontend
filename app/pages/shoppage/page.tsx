@@ -1,11 +1,11 @@
 "use client";
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import ProductCard from '@/components/product/productCard';
 import ProductFilter from '@/components/product/productFilter';
 import Pagination from '@/app/component/layout/Pagination';
 import { FaFilter, FaTimes, FaStar } from 'react-icons/fa';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 24;
 
@@ -28,10 +28,27 @@ const productsData = [
   { id: 16, name: 'LED Desk Lamp', image: '/products/product8.jpg', price: 18000, discount: 7, rating: 4.6, category: 'Home', isBestSelling: true, isTrending: false, isInStock: true, isBestSeller: true, isFavorite: false, isFreeDelivery: false, isDiscounted: true, isAdd: false }
 ];
 
+  const bannerImages = [
+    "/ShopDiscountBanner1.png",
+    "/ShopDiscountBanner2.png",
+    "/ShopDiscountBanner3.png",
+  ];
+
+  
 
 export default function ProductListingPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentBanner = bannerImages[currentIndex];
+
+   useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const allTopSellingProducts = productsData.filter(product => product.isBestSeller);
   const allBestSellingProducts = productsData.filter(product => product.isBestSelling);
@@ -46,7 +63,8 @@ export default function ProductListingPage() {
   const displayedProducts = currentPage === 1 
     ? []
     : remainingProducts.slice((currentPage - 2) * ITEMS_PER_PAGE, (currentPage - 1) * ITEMS_PER_PAGE);
-
+  
+  
   return (
     <div className="min-h-screen flex flex-col">
       {/* <div className="min-h-screen flex flex-col "> */}
@@ -89,16 +107,33 @@ export default function ProductListingPage() {
 
 
       
-      {/* Animated Sale Banner */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="w-full mt-6 flex justify-center"
-      >
-        <Image src="/ShopDiscountBanner.png" alt="Mega Sale" width={1000} height={300} className="rounded-lg shadow-lg" />
-      </motion.div>
-    {/* </div> */}
+ {/* Animated Rotating Banner */}
+<div className="w-full h-80 mt-6 flex justify-center items-center overflow-hidden relative">
+  <AnimatePresence mode="popLayout">
+  <motion.div
+    key={currentBanner}
+    initial={{ x: 300, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: -300, opacity: 0 }}
+    transition={{
+      x: { type: "spring", stiffness: 70, damping: 10 },
+      opacity: { duration: 0.5 }
+    }}
+    className="absolute w-auto h-80 flex justify-center"
+  >
+    <Image
+      src={currentBanner}
+      alt="Sale Banner"
+      width={1000}
+      height={300}
+      className="rounded-lg shadow-lg object-cover"
+      priority
+    />
+  </motion.div>
+</AnimatePresence>
+
+
+</div>
 
       <button 
         className="lg:hidden fixed top-4 right-4 bg-gray-200 text-gray-800 p-3 rounded-full shadow-xl z-50"
