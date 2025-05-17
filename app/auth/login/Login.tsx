@@ -73,6 +73,8 @@ function Login() {
       <div className="flex flex-col md:flex-row flex-grow">
         {/* Left side: Image element (hidden on small screens) */}
         <div className="hidden md:block md:w-1/2">
+        
+             {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/loginIllustrater.png" // <-- Change to your actual image path
             alt="Login Illustration"

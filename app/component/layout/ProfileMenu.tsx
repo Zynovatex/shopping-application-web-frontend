@@ -43,7 +43,7 @@ export default function ProfileMenu() {
           <ul className="py-2 text-sm text-gray-700">
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push('/profile')}
+              onClick={() => router.push('/pages/userProfile')}
             >
               <User size={16} /> View Profile
             </li>
