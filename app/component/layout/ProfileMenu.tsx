@@ -56,7 +56,7 @@ export default function ProfileMenu() {
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
               onClick={() => {
-              localStorage.removeItem('token');    //  Remove login token
+              localStorage.removeItem('authToken');    //  Remove login token
               setOpen(false);                      //  Close dropdown
               window.location.href = '/pages/landingpage';          // Go to home (refresh triggers HeaderGuest)
                }}

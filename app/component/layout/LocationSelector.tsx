@@ -6,14 +6,34 @@ import { MapPin } from 'lucide-react'; // optional icon
 const cities = [
   'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo',
   'Galle', 'Gampaha', 'Hambantota', 'Jaffna', 'Kalutara',
-  'Kandy', 'Kegalle','Kilinochchi', 'Kurunegala', 'Mannar',
+  'Kandy', 'Kegalle', 'Kilinochchi', 'Kurunegala', 'Mannar',
   'Matale', 'Matara', 'Moneragala', 'Nuwara Eliya', 'Polonnaruwa',
-  'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya','Other'
+  'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya', 'Other',
+  'Dehiwala', 'Moratuwa', 'Negombo', 'Panadura', 'Kalmunai',
+  'Baddegama', 'Bentota', 'Horana', 'Bandarawela', 'Haputale',
+  'Balangoda', 'Dickwella', 'Talawakele', 'Hatton', 'Wattala',
+  'Weligama', 'Koggala', 'Elpitiya', 'Beruwala', 'Ifthikhar Nagar',
+  'Akurana', 'Dambulla', 'Habarana', 'Katunayake', 'Seeduwa',
+  'Pannala', 'Kuliyapitiya', 'Chilaw', 'Mannar Town', 'Mulativu',
+  'Valvettithurai', 'Point Pedro', 'Puliyankulam', 'Kalpitiya',
+  'Udugampola', 'Minuwangoda', 'Giriulla', 'Mahiyanganaya',
+  'Akkaraipattu', 'Kalmunai Town', 'Beragala', 'Nawalapitiya',
+  'Hatton Town', 'Rathnapura Town', 'Balangoda Town', 'Avissawella',
+  'Peliyagoda', 'Kadawatha', 'Kiribathgoda', 'Kelaniya', 'Malabe',
+  'Kaduwela', 'Thalawathugoda', 'Homagama', 'Padukka', 'Mawanella',
+  'Polgahawela', 'Kegalle Town', 'Melsiripura', 'Ambalangoda',
+  'Hikkaduwa', 'Morawaka', 'Rakwana', 'Deniyaya', 'Ahungalla',
+  'Katuwana', 'Madampe', 'Chilaw Town', 'Puttalam Town',
+  'Kilinochchi Town', 'Vavuniya Town', 'Trincomalee Town',
+  'Muttur', 'Batticaloa Town', 'Kalmunai East', 'Kalmunai West',
+  'Kinniya', 'Eravur', 'Chenkalady', 'Chavakachcheri', 'Jaffna Town',
+  'Tellippalai', 'Valvettithurai Town', 'Karainagar', 'Kayts',
+  'Other'
 ];
 
 export default function LocationSelector() {
   const [open, setOpen] = useState(false);
-  const [selectedCity, setSelectedCity] = useState('Selected Location');
+  const [selectedCity, setSelectedCity] = useState('Selected City');
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Close if click outside
@@ -42,9 +62,9 @@ export default function LocationSelector() {
       {open && (
         <div className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
           <ul className="max-h-60 overflow-auto">
-            {cities.map((city) => (
+            {cities.map((city, index) => (
               <li
-                key={city}
+                key={`${city}-${index}`}
                 onClick={() => {
                   setSelectedCity(city);
                   setOpen(false);
