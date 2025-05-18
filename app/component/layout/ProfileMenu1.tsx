@@ -39,13 +39,13 @@ export default function ProfileMenu1({ open, setOpen }: Props) {
               <LogIn size={16} />
               <Link href="/auth/login">Login</Link>
             </li>
-            {/* Register-shop */}
+            {/* Register */}
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push("/auth/login")}
+              onClick={() => router.push("/auth/register")}
             >
               <LogIn size={16} />
-              <Link href="/shop-registerations">Register Shop</Link>
+              <Link href="/auth/register">Register</Link>
             </li>
 
             {/* Sign up

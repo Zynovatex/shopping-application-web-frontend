@@ -9,7 +9,7 @@ const Header = () => {
 
   useEffect(() => {
     // ✅ Example: check token in localStorage (adjust if using cookies)
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authToken");
     setIsLoggedIn(!!token);
   }, []);
 
