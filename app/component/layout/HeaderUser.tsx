@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 import Link from "next/link";
 import LocationSelector from "@/app/component/layout/LocationSelector";
@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const Header = () => {
   const [open, setOpen] = useState(false); // State to manage dropdown menu visibility
+  const router = useRouter();
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-3 shadow-sm border-b bg-blue-30">
@@ -69,7 +70,7 @@ const Header = () => {
           {/* Cart */}
           <div className="relative flex items-center  hover:text-blue-600">
             <button
-              onClick={() => console.log("Cart icon clicked")}
+              onClick={() => router.push("/cart")}
               className="flex items-center focus:outline-none"
             >
               <FaShoppingCart />
