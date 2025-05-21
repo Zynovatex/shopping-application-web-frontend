@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser, RegistrationData } from "@/app/api/auth/authantication";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/app/component/layout/Footer";
+
 
 const Register = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Register = () => {
       name,
       email,
       password,
-      role: "BUYER", // Automatically set role for buyer registration
+      role: "SELLER", // Automatically set role for buyer registration
     };
 
     try {
@@ -32,6 +33,7 @@ const Register = () => {
       console.log("Registration result:", result);
       // Redirect to the login page or another page after successful registration
       router.push("/auth/login");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(
         err.response?.data?.message || "Registration failed. Please try again."
@@ -42,7 +44,7 @@ const Register = () => {
   const isValidEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
-
+  
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col md:flex-row flex-grow">

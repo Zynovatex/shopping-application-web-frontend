@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+
 import Image from "next/image";
 import { Truck, ChevronLeft, ChevronRight } from "lucide-react";
 import ProductReview from "../../component/product/productReview";
@@ -335,22 +336,6 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Popup Card */}
-      {/* {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-            <h3 className="text-lg font-bold">Order Confirmation</h3>
-            <p className="mt-2">Your order has been placed successfully!</p>
-            <button
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
-              onClick={() => setShowPopup(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
 
       {/* Related Products Section */}
       <div className="mt-16 text-center">

@@ -38,9 +38,9 @@ export default function AboutPage() {
     {/* First Row: 3 Members */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {[
-            { name: "Nimesh Madhushan", image: "/member1.jpeg" },
-            { name: "Kasun Sakthi", image: "/member1.jpeg" },
-            { name: "Sanduni Hewagama", image: "/member1.jpeg" },
+            { name: "Nimesh Madhushan", image: "/team/nemesh.jpeg" },
+            { name: "Kasun Sakthi", image: "/team/kasun.jpeg" },
+            { name: "Sanduni Hewagama", image: "/team/sadu.jpeg" },
         ].map((member, index) => (
             <div 
                 key={index} 
@@ -73,8 +73,8 @@ export default function AboutPage() {
 {/* Second Row: 2 Members (Larger Images, Centered) */}
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mt-8 justify-center place-items-center">
     {[
-        { name: "Lingaraj", image: "/member1.jpeg" },
-        { name: "Sashini Himaya", image: "/member1.jpeg" },
+        { name: "Lingaraj", image: "/team/lingaraj.jpeg" },
+        { name: "Sashini Himaya", image: "/team/sashini.jpeg" },
     ].map((member, index) => (
         <div 
             key={index} 

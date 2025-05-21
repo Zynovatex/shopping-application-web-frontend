@@ -8,7 +8,7 @@ interface RegistrationFormProps {
   vatRegistered: boolean;
   registrationType: string;
   registrationDocuments: string[];
-  onChange: (field: string, value: any) => void;
+  onChange: (field: string, value: string| boolean |string[]) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -27,7 +27,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
   const handleMultipleUpload = async (files: File[]) => {
     const uploadedURLs: string[] = [];
-    for (let file of files) {
+    for (const file of files) {
       const url = await uploadFileToFirebase(file, "registrationDocs");
       uploadedURLs.push(url);
     }

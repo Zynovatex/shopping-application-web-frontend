@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { LogIn } from 'lucide-react'; 
+import { useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { LogIn } from "lucide-react";
 import Link from "next/link";
 
 //  Props type
@@ -22,8 +22,8 @@ export default function ProfileMenu1({ open, setOpen }: Props) {
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setOpen]);
 
   return (
@@ -34,18 +34,18 @@ export default function ProfileMenu1({ open, setOpen }: Props) {
             {/* Login */}
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push('/auth/login')}
+              onClick={() => router.push("/auth/login")}
             >
               <LogIn size={16} />
-               <Link href="/auth/login">Login</Link>
+              <Link href="/auth/login">Login</Link>
             </li>
-             {/* Register-shop */}
+            {/* Register-shop */}
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push('/auth/login')}
+              onClick={() => router.push("/shop-registrations/")}
             >
               <LogIn size={16} />
-               <Link href="/shop-registerations">Register Shop</Link>
+              <Link href="/shop-registrations">Register Shop</Link>
             </li>
 
             {/* Sign up

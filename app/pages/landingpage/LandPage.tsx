@@ -82,89 +82,72 @@ const categories = [
     name: "Electronics items",
   },
 ];
-
-const shopsData = [
+const shopsData: {
+  id: number;
+  shopName: string;
+  address: string;
+  category: string;
+  shopImages: string[];
+  isFavorite: boolean;
+}[] = [
   {
     id: 1,
-    name: "Bakery Delight",
-    image: "/shop/shop1.jpg",
+    shopName: "Bakery Delight",
+    address: "No. 12, Baker Street", // You can update actual address here
     category: "Bakery",
-    rating: 4.5,
-    isOpen: true,
-    isTopRated: true,
+    shopImages: ["/shop/shop1.jpg"],
     isFavorite: false,
   },
   {
     id: 2,
-    name: "Fresh Mart",
-    image: "/shop/shop2.jpg",
+    shopName: "Fresh Mart",
+    address: "No. 45, Market Road",
     category: "Grocery",
-    rating: 4.2,
-    isOpen: false,
-    isTopRated: true,
+    shopImages: ["/shop/shop2.jpg"],
     isFavorite: true,
   },
   {
     id: 3,
-    name: "Organic Hub",
-    image: "/shop/shop3.jpg",
+    shopName: "Organic Hub",
+    address: "No. 8, Green Lane",
     category: "Organic",
-    rating: 4.8,
-    isOpen: true,
-    isTopRated: true,
+    shopImages: ["/shop/shop3.jpg"],
     isFavorite: false,
   },
   {
     id: 4,
-    name: "Daily Essentials",
-    image: "/shop/shop4.jpg",
+    shopName: "Daily Essentials",
+    address: "No. 21, Main Street",
     category: "Supermarket",
-    rating: 4.0,
-    isOpen: true,
-    isTopRated: true,
+    shopImages: ["/shop/shop4.jpg"],
     isFavorite: true,
   },
   {
     id: 5,
-    name: "Local Market",
-    image: "/shop/shop5.jpg",
+    shopName: "Local Market",
+    address: "No. 9, Market Street",
     category: "Grocery",
-    rating: 4.3,
-    isOpen: false,
-    isTopRated: true,
+    shopImages: ["/shop/shop5.jpg"],
     isFavorite: false,
   },
   {
     id: 6,
-    name: "Tasty Bites",
-    image: "/shop/shop6.jpg",
+    shopName: "Tasty Bites",
+    address: "No. 7, Baker Street",
     category: "Bakery",
-    rating: 4.7,
-    isOpen: true,
-    isTopRated: true,
+    shopImages: ["/shop/shop6.jpg"],
     isFavorite: true,
   },
   {
     id: 7,
-    name: "Quick Grocery",
-    image: "/shop/shop7.jpg",
+    shopName: "Quick Grocery",
+    address: "No. 32, Supermarket Road",
     category: "Supermarket",
-    rating: 4.1,
-    isOpen: false,
-    isTopRated: true,
-    isFavorite: false,
-  },
-  {
-    id: 1,
-    name: "Bakery Delight",
-    image: "/shop/shop1.jpg",
-    category: "Bakery",
-    rating: 4.5,
-    isOpen: true,
-    isTopRated: true,
+    shopImages: ["/shop/shop7.jpg"],
     isFavorite: false,
   },
 ];
+
 
 export default function LandingPage() {
   const router = useRouter();
@@ -172,7 +155,7 @@ export default function LandingPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  const allTopRatedShops = shopsData.filter((shop) => shop.isTopRated);
+  const allTopRatedShops = shopsData.filter(() => true);
 
   const [startIndex, setStartIndex] = useState(0);
   const visibleShops = 5; // Default number of shops displayed

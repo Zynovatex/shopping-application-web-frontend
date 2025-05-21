@@ -26,6 +26,7 @@ const RequestOTP = () => {
       setTimeout(() => {
         router.push("/auth/verify-otp");
       }, 3000);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to send OTP.");
       setMessage(null);

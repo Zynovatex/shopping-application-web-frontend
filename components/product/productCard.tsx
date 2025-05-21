@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { FaCartPlus, FaShoppingCart } from "react-icons/fa"; 
-import { FaTruck } from "react-icons/fa"; // Free Shipping Icon
+import {
+  FaHeart,
+  FaRegHeart,
+  FaCartPlus,
+  FaShoppingCart,
+  FaTruck,
+} from "react-icons/fa";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; 
-
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: {
@@ -28,45 +31,42 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
   const [isAdd, setIsAdd] = useState(product.isAdd);
-  const [isHovered, setIsHovered] = useState(false);
-
   const router = useRouter();
 
   const handleCardClick = () => {
-    // router.push(`/shop/${shop.id}`); // Navigate to shop page when clicking the card
     router.push("/pages/productpage");
   };
 
   return (
     <div
-      className={`relative bg-white rounded-lg w-[246px] h-[270px] overflow-hidden transition-all duration-300 ease-out
-      ${isHovered ? "shadow-2xl scale-105" : "shadow-lg border-transparent"}
-      border-[1px] cursor-pointer`}
-      
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleCardClick} // Navigate to shop page on card click
+      className="relative bg-white border border-[#4827c4] rounded-lg shadow-lg w-[230px] h-[265px] overflow-visible
+        transition-transform duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer"
+      onClick={handleCardClick}
     >
-      
-      
-      {/* Product Image Section */}
-      <div className="relative w-full h-[150px]">
+      {/* Image Container */}
+      <div className="relative w-full h-[160px] rounded-t-lg overflow-hidden">
         <Image
           src={product.image}
           alt={product.name}
           layout="fill"
           objectFit="cover"
-          className="rounded-t-lg"
         />
 
-        {/* Favorite Button (Appears on Hover) */}
+        {/* Favorite Icon (Always Visible) */}
         <div
-          className={`absolute top-3 right-3 bg-white p-2 rounded-full cursor-pointer shadow-md transition-transform duration-300 
-          ${isHovered ? "opacity-100 scale-110" : "opacity-0 scale-90"}
-          hover:scale-125`}
+          className="absolute top-3 right-3 bg-white p-2 rounded-full cursor-pointer shadow-md transition-transform duration-300 hover:scale-110 z-20"
           onClick={(e) => {
-            e.stopPropagation(); // Prevent triggering card click
+            e.stopPropagation();
             setIsFavorite(!isFavorite);
+          }}
+          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setIsFavorite(!isFavorite);
+            }
           }}
         >
           {isFavorite ? (
@@ -76,61 +76,82 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
         </div>
       </div>
-      
-      {/* Product Info */}
-      <div className="p-3">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-1">
-            <span className="font-bold text-sm text-[#000000]">{product.name}</span>
 
-          </div>
-          <div className="flex items-center font-semibold">
-            <span className={`ml-2 text-[#7b5af7] text-xs flex items-center bg-[#bdadfb] px-3 py-1 rounded-full font-semibold 
-              ${product.isDiscounted ? "visible" : "invisible"}`}>
+      {/* Info Section */}
+      <div className="p-2 flex flex-col justify-between h-[105px]">
+        <div>
+          <h3 className="font-bold text-sm mb-1">{product.name}</h3>
+
+          {/* Discount and Price */}
+          <div className="flex items-center justify-between">
+            <span
+              className={`text-xs px-2 py-1 rounded-full font-semibold text-blue-700 bg-purple-200 ${
+                product.isDiscounted ? "visible" : "invisible"
+              }`}
+            >
               -{product.discount}%
             </span>
-            <span className="ml-2 text-xs text-[#5A31F5]">Rs {product.price}</span>
+            <span className="text-xs text-blue-700 font-semibold">
+              Rs {product.price.toFixed(2)}
+            </span>
           </div>
-        </div>
 
-        <div className="flex justify-between items-center mt-2">
-          <div className="flex items-center space-x-1">  
-            <span className={`text-red-600 text-[11px] font-semibold italic flex ${product.isBestSeller ? "visible" : "invisible"}`}>
+          {/* Best Seller, Stock & Rating */}
+          <div className="flex items-center justify-between mt-1">
+            <span
+              className={`text-red-600 text-[11px] italic font-semibold ${
+                product.isBestSeller ? "visible" : "invisible"
+              }`}
+            >
               Best Seller
             </span>
-          </div>
-          <div className="flex items-center">
-            <span className={`text-xs ${product.isInStock ? "text-green-600" : "text-red-500"}`}>
+            <span
+              className={`text-xs ${
+                product.isInStock ? "text-green-600" : "text-red-500"
+              }`}
+            >
               {product.isInStock ? "In stock" : "Out of stock"}
             </span>
-            <span className="ml-2 font-semibold text-xs text-[#000000]">{product.rating}⭐</span>
+            <span className="ml-2 font-semibold text-xs text-[#000000]">
+              {product.rating}⭐
+            </span>
           </div>
         </div>
-      </div>
-      <div>
 
-          {/* Free Shipping Icon */}
+        {/* Container div relative to position absolute inside */}
+        <div className="relative mt-auto flex items-center min-h-[32px]">
+          {/* Free Shipping text (if any) */}
           {product.isFreeDelivery && (
-              <span className="text-green-600 text-xs flex items-center px-2 -mt-1 rounded-full font-semibold">
-                <FaTruck className="mr-1" size={12} /> Free Shipping
-              </span>
+            <span className="text-green-600 text-xs flex items-center px-2 rounded-full font-semibold">
+              <FaTruck className="mr-1" size={12} /> Free Shipping
+            </span>
+          )}
+
+          {/* Cart button absolute at right bottom corner */}
+          <button
+            className="absolute right-0 bottom-0 z-20 bg-white p-2 rounded-full shadow-md cursor-pointer hover:scale-110 transition-transform"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsAdd(!isAdd);
+            }}
+            aria-label={isAdd ? "Remove from cart" : "Add to cart"}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsAdd(!isAdd);
+              }
+            }}
+          >
+            {isAdd ? (
+              <FaCartPlus className="text-red-500" size={20} />
+            ) : (
+              <FaShoppingCart className="text-blue-700" size={20} />
             )}
-  
-      {/* Add to Cart Button (Always Visible) */}
-      <div
-        className="absolute bottom-3 right-3 bg-white p-2 rounded-full cursor-pointer shadow-md transition-transform duration-300 hover:scale-110 hover:shadow-lg"
-        onClick={(e) => {
-          e.stopPropagation(); // Prevent triggering card click
-          setIsAdd(!isAdd);
-        }}
-      >
-        {isAdd ? (
-          <FaCartPlus className="text-red-500" size={20} />
-        ) : (
-          <FaShoppingCart className="text-[#5A31F5]" size={20} />
-        )}
+          </button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

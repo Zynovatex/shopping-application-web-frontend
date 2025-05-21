@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { User, Settings, LogOut } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { User, Settings, LogOut } from "lucide-react";
 
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false);
@@ -17,8 +17,8 @@ export default function ProfileMenu() {
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -43,27 +43,29 @@ export default function ProfileMenu() {
           <ul className="py-2 text-sm text-gray-700">
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push('/pages/userProfile')}
+              //  onClick={() => router.push("/profile")}
+               onClick={() => router.push("/pages/userProfile")}
             >
               <User size={16} /> View Profile
             </li>
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-              onClick={() => router.push('/settings')}
+              // onClick={() => router.push("/settings")}
+              onClick={() => router.push("/pages/setting")}
             >
               <Settings size={16} /> Settings
             </li>
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
               onClick={() => {
-              localStorage.removeItem('authToken');    //  Remove login token
-              setOpen(false);                      //  Close dropdown
-              window.location.href = '/pages/landingpage';          // Go to home (refresh triggers HeaderGuest)
-               }}
-              >
-            <LogOut size={16} />
-             Logout
-           </li>
+                localStorage.removeItem("authToken"); //  Remove login token
+                setOpen(false); //  Close dropdown
+                window.location.href = "/pages/landingpage"; // Go to home (refresh triggers HeaderGuest)
+              }}
+            >
+              <LogOut size={16} />
+              Logout
+            </li>
           </ul>
         </div>
       )}

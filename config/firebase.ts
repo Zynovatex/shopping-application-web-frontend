@@ -1,26 +1,43 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
+// Import only what’s safe to run server-side
+// firebase.ts
+import { initializeApp, getApps, getApp,  } from "firebase/app";
 import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDzk1LWw7P1BGjPCjrmGECNiZLO64GkuJk",
-  authDomain: "virtual-city-b6fc3.firebaseapp.com",
-  projectId: "virtual-city-b6fc3",
-  storageBucket: "virtual-city-b6fc3.firebasestorage.app",
-  messagingSenderId: "469865833244",
-  appId: "1:469865833244:web:08db8fe9a1f90bc520d0d9",
-  measurementId: "G-TW3NX5H88V",
-};
+  apiKey: "AIzaSyDi4gwpnDneMcyuqFyGEXaDvMKsa-EsTB8",
+  authDomain: "vcity01-fa491.firebaseapp.com",
+  projectId: "vcity01-fa491",
+  storageBucket: "vcity01-fa491.firebasestorage.app",
+  messagingSenderId: "82968031109",
+  appId: "1:82968031109:web:706a7f9c40525fe07e9eec",
+  measurementId: "G-43D0FL3FR4",
+}
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-const auth = getAuth(app); // Initialize auth
+// Initialize (or reuse) the Firebase App
+// Initialize Firebase app or reuse existing
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-export { storage, auth };
+// Export storage unconditionally (safe on server and client)
+// Export Firebase Storage (safe on server and client)
+export const storage = getStorage(app);
+
+// ── NEW: analytics must only initialize in the browser ──
+// Analytics: initialize only on client, dynamically imported
+let analytics = null;
+
+if (typeof window !== "undefined") {
+  // Using require here so we don’t break SSR
+ 
+  // Dynamic import to avoid SSR issues and timing problems
+  import("firebase/analytics")
+    .then(({ getAnalytics }) => {
+      analytics = getAnalytics(app);
+    })
+    .catch((err) => {
+      console.warn("Firebase analytics failed to initialize:", err);
+    });
+}
+
+// Export analytics (will be null on the server)
+export { analytics };

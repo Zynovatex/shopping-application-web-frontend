@@ -5,7 +5,6 @@ import ShopDetailsForm from "./ShopDetailsForm";
 import RegistrationForm from "./RegistrationForm";
 import PaymentOthersForm from "./PaymentOthersForm";
 import { ShopDTO, registerShop } from "../api/auth/shopRegistration";
-import Footer from "../component/layout/Footer";
 
 const ShopRegistrationPage: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -50,7 +49,7 @@ const ShopRegistrationPage: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   // Handle input changes from child forms
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: unknown) => {
     setShopData((prev) => ({
       ...prev,
       [field]: value,
@@ -64,7 +63,10 @@ const ShopRegistrationPage: React.FC = () => {
   // Final save on last form
   const handleFinalSave = async () => {
     try {
-      const token = localStorage.getItem("authToken") || "";
+      // const token = localStorage.getItem("authToken") || "";
+      const token =
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZXdhZ2FtYXNhbmR1bmkyQGdtYWlsLmNvbSIsImlhdCI6MTc0NzgyMzY5MCwiZXhwIjoxNzQ3ODI3MjkwfQ.e-GUi3jluSgclAFr-KbDYDG4MULZrxI0Js50IQz7nQY";
+
       const response = await registerShop(shopData, token);
       console.log("Shop registration successful:", response);
 

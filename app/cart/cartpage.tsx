@@ -34,6 +34,7 @@ const CartPage = () => {
     try {
       const cartData = await fetchCart();
       setCart(cartData);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Failed to load cart.");
     } finally {

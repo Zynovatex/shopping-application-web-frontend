@@ -13,7 +13,6 @@ export interface ShopResponse {
   isFavorite: boolean;
 }
 
-
 /**
  * Shape of the combined shop+products response.
  * (You may not need this on the landing page, but it’s here for future use.)

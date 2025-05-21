@@ -28,7 +28,7 @@ export default function Login() {
 
       //  NEW: Full reload to “/” so HeaderGuest logic runs
       window.location.href = "/";
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(
         err.response?.data?.message || "Login failed. Please try again."
@@ -44,7 +44,6 @@ export default function Login() {
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col md:flex-row flex-grow">
         <div className="hidden md:block md:w-1/2">
-          
           <img
             src="/loginIllustrater.png"
             alt="Login Illustration"

@@ -3,44 +3,52 @@
 import { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa"; // Favorite icons
 import Image from "next/image";
-import { useRouter } from "next/navigation"; 
-
+import { useRouter } from "next/navigation";
 
 interface ShopCardProps {
   shop: {
     id: number;
-    name: string;
-    image: string;
+    shopName: string;
+    address: string;
     category: string;
-    rating: number;
-    isOpen: boolean;
-    isTopRated: boolean;
+    shopImages: string[];
     isFavorite: boolean;
   };
 }
-
 
 const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
   const [isFavorite, setIsFavorite] = useState(shop.isFavorite);
   const router = useRouter();
 
-  const handleCardClick = () => {
-    // router.push(`/shop/${shop.id}`); // Navigate to shop page when clicking the card
-    router.push("/pages/shoppage");
-  };
+  // const handleCardClick = () => {
+  //   // router.push(`/shop/${shop.id}`); // Navigate to shop page when clicking the card
+  //  router.push(
+  //   pathname: "/pages/shoppage",{
+  //   query: { shopId: shop.id, shopName: shop.name },
+  // );
+  // };
 
+const handleCardClick = (shopId: number, shopName: string) => {
+  // Construct URL with query parameters
+  const queryString = `?shopId=${shopId}&shopName=${encodeURIComponent(shopName)}`;
+  router.push(`/pages/shoppage${queryString}`);
+};
 
+  const imageSrc =
+    shop.shopImages && shop.shopImages.length > 0
+      ? shop.shopImages[0]
+      : "/public/shoplogo.png"; // Fallback image
   return (
     <div
       className="relative bg-white border border-[#4827c4] rounded-lg shadow-lg w-[220px] h-[235px] overflow-hidden
         transition-transform duration-300 ease-out hover:scale-105 hover:shadow-2xl"
-        onClick={handleCardClick} // Navigate to shop page on card click
+      onClick={() => handleCardClick(shop.id, shop.shopName)} // Navigate to shop page on card click
     >
       {/* Image Section */}
       <div className="relative w-full h-[170px]">
         <Image
-          src={shop.image}
-          alt={shop.name}
+          src={imageSrc}
+          alt={shop.shopName ? shop.shopName : "Shop image"}
           layout="fill"
           objectFit="cover"
           className="rounded-t-lg"
@@ -53,7 +61,6 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
             e.stopPropagation(); // Prevents navigation when clicking the favorite button
             setIsFavorite(!isFavorite);
           }}
-
         >
           {isFavorite ? (
             <FaHeart className="text-red-500" size={18} />
@@ -73,13 +80,17 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
         {/* Shop Name & Open/Closed Status */}
         <div className="flex justify-between items-center">
           <div className="flex items-center text-[#000000] space-x-1">
-            <span className="font-bold text-sm">{shop.name}</span>
+            <span className="font-bold text-sm">{shop.shopName}</span>
             <span className="font-bold">®</span>
           </div>
           <span
-            className={`text-xs ${shop.isOpen ? "text-green-600" : "text-red-500"}`}
+            className={`text-xs  ${
+              "text-green-600"
+              // shop.isOpen ? "text-green-600" : "text-red-500"
+            }`}
           >
-            {shop.isOpen ? "Open" : "Closed"}
+            {/* {shop.isOpen ? "Open" : "Closed"} */}
+            Open
           </span>
         </div>
 
@@ -87,14 +98,18 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
         <div className="flex justify-between items-center mt-1">
           <span
             className={`text-red-600 flex items-center ${
-              shop.isTopRated ? "visible" : "invisible"
+              // shop.isTopRated ? "visible" : "invisible"
+              "visible"
             }`}
           >
-            🏆 <span className="ml-1 italic font-semibold text-[10px]">Top Rated</span>
+            🏆{" "}
+            <span className="ml-1 italic font-semibold text-[10px]">
+              Top Rated
+            </span>
           </span>
 
           <div className="flex items-center font-semibold">
-            <span className="ml-2 text-xs text-[#000000]">{shop.rating}⭐</span>
+            <span className="ml-2 text-xs text-[#000000]">{3}⭐</span>
           </div>
         </div>
       </div>

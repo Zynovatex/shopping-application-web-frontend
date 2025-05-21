@@ -6,6 +6,7 @@ import LocationSelector from "@/app/component/layout/LocationSelector";
 import ProfileMenu from "@/app/component/layout/ProfileMenu";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import router from "next/router";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -68,7 +69,8 @@ const Header = () => {
           {/* Cart */}
           <div className="relative flex items-center  hover:text-blue-600">
             <button
-              onClick={() => console.log("Cart icon clicked")}
+             
+              onClick={() => router.push("/cart")}
               className="flex items-center focus:outline-none"
             >
               <FaShoppingCart />
@@ -100,9 +102,7 @@ const Header = () => {
               <span className="text-sm font-semibold text-black ">
                 Hi..User
               </span>
-              <span className="text-sm font-bold text-black">
-                Account
-              </span>
+              <span className="text-sm font-bold text-black">Account</span>
             </div>
           </div>
         </div>

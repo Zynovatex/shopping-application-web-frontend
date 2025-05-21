@@ -1,13 +1,22 @@
 "use client";
 import { useState } from "react";
-import { FaSearch, FaShoppingCart, FaHeart, FaUser, FaBars } from "react-icons/fa";
+
+import {
+  FaSearch,
+  FaShoppingCart,
+  FaHeart,
+  FaUser,
+  FaBars,
+} from "react-icons/fa";
 import Link from "next/link";
 import LocationSelector from "@/app/component/layout/LocationSelector";
 import ProfileMenu1 from "@/app/component/layout/ProfileMenu1";
+import router from "next/router";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false); // for mobile nav toggle
+
 
   return (
     <header className="w-full px-4 py-3 shadow-sm border-b bg-white sticky top-0 z-50">
@@ -30,10 +39,30 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-4 text-gray-700 text-base font-medium ml-8">
-            <Link href="/pages/landingpage" className="px-3 py-2 rounded hover:bg-gray-100">Home</Link>
-            <Link href="/pages/about" className="px-3 py-2 rounded hover:bg-gray-100">About</Link>
-            <Link href="/pages/blog" className="px-3 py-2 rounded hover:bg-gray-100">Blog</Link>
-            <Link href="/pages/contact" className="px-3 py-2 rounded hover:bg-gray-100">Contact</Link>
+            <Link
+              href="/pages/landingpage"
+              className="px-3 py-2 rounded hover:bg-gray-100"
+            >
+              Home
+            </Link>
+            <Link
+              href="/pages/about"
+              className="px-3 py-2 rounded hover:bg-gray-100"
+            >
+              About
+            </Link>
+            <Link
+              href="/pages/blog"
+              className="px-3 py-2 rounded hover:bg-gray-100"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/pages/contact"
+              className="px-3 py-2 rounded hover:bg-gray-100"
+            >
+              Contact
+            </Link>
           </nav>
         </div>
 
@@ -55,9 +84,10 @@ const Header = () => {
 
           <div className="flex items-center gap-4 text-gray-700">
             {/* Cart */}
-            <button
-              onClick={() => console.log("Cart icon clicked")}
-              className="hover:text-blue-600"
+          <button
+             
+              onClick={() => router.push("/auth/login")}
+              className="flex items-center focus:outline-none"
             >
               <FaShoppingCart />
             </button>
@@ -88,10 +118,30 @@ const Header = () => {
       {/* Mobile Nav Links */}
       {navOpen && (
         <div className="md:hidden mt-4 space-y-2 text-sm text-gray-700">
-          <Link href="/pages/landingpage" className="block px-4 py-2 hover:bg-gray-100">Home</Link>
-          <Link href="/pages/about" className="block px-4 py-2 hover:bg-gray-100">About</Link>
-          <Link href="/pages/blog" className="block px-4 py-2 hover:bg-gray-100">Blog</Link>
-          <Link href="/pages/contact" className="block px-4 py-2 hover:bg-gray-100">Contact</Link>
+          <Link
+            href="/pages/landingpage"
+            className="block px-4 py-2 hover:bg-gray-100"
+          >
+            Home
+          </Link>
+          <Link
+            href="/pages/about"
+            className="block px-4 py-2 hover:bg-gray-100"
+          >
+            About
+          </Link>
+          <Link
+            href="/pages/blog"
+            className="block px-4 py-2 hover:bg-gray-100"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/pages/contact"
+            className="block px-4 py-2 hover:bg-gray-100"
+          >
+            Contact
+          </Link>
         </div>
       )}
     </header>

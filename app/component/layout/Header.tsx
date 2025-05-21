@@ -11,7 +11,7 @@ const Header = () => {
     // Example: check token in localStorage (adjust if using cookies)
     const token = localStorage.getItem("authToken");
     setIsLoggedIn(!!token);
-     // ✅ Listen for "login-success" event
+    // ✅ Listen for "login-success" event
     const handleLoginSuccess = () => {
       setIsLoggedIn(true);
     };
@@ -23,9 +23,7 @@ const Header = () => {
     };
   }, []);
 
-
-  return isLoggedIn ? <HeaderUser />: <HeaderGuest  />;
+  return isLoggedIn ? <HeaderUser /> : <HeaderGuest />;
 };
-
 
 export default Header;
