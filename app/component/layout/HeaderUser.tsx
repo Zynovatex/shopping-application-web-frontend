@@ -4,11 +4,32 @@ import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 import Link from "next/link";
 import LocationSelector from "@/app/component/layout/LocationSelector";
 import ProfileMenu from "@/app/component/layout/ProfileMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchUserProfile } from "@/app/api/auth/profileApi"; // Adjust path as needed
 
 const Header = () => {
-  const [open, setOpen] = useState(false); // State to manage dropdown menu visibility
+  const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  const [userName, setUserName] = useState("User");
+
+  const token =
+    typeof window !== "undefined"
+      ? localStorage.getItem("authToken") ?? ""
+      : "";
+
+  useEffect(() => {
+    async function loadUser() {
+      if (!token) return;
+      try {
+        const profile = await fetchUserProfile(token);
+        if (profile?.name) setUserName(profile.name);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    }
+    loadUser();
+  }, [token]);
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-3 shadow-sm border-b bg-blue-30">
@@ -68,7 +89,7 @@ const Header = () => {
         {/* Icons */}
         <div className="flex items-center gap-8 text-gray-700">
           {/* Cart */}
-          <div className="relative flex items-center  hover:text-blue-600">
+          <div className="relative flex items-center hover:text-blue-600">
             <button
               onClick={() => router.push("/cart")}
               className="flex items-center focus:outline-none"
@@ -78,7 +99,7 @@ const Header = () => {
           </div>
 
           {/* Favorites */}
-          <div className="relative flex items-center  hover:text-red-600">
+          <div className="relative flex items-center hover:text-red-600">
             <button
               onClick={() => console.log("Favorites icon clicked")}
               className="flex items-center focus:outline-none"
@@ -94,16 +115,10 @@ const Header = () => {
           onClick={() => setOpen(!open)}
         >
           <div className="flex items-center gap-2">
-            {/* Your profile dropdown menu */}
             <ProfileMenu />
-
-            {/* Text */}
             <div className="flex flex-col leading-tight">
               <span className="text-sm font-semibold text-black hover:underline">
-                Hi..User
-              </span>
-              <span className="text-sm font-bold text-black hover:underline">
-                Account
+                Hi {userName}..
               </span>
             </div>
           </div>

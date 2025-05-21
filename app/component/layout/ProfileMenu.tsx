@@ -4,11 +4,36 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { User, Settings, LogOut } from "lucide-react";
+import { fetchUserProfile } from "@/app/api/auth/profileApi"; // adjust path
 
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  // State for profile picture URL
+  const [profilePicUrl, setProfilePicUrl] = useState<string | null>(null);
+
+  // Get token (client side only)
+  const token =
+    typeof window !== "undefined"
+      ? localStorage.getItem("authToken") ?? ""
+      : "";
+
+  // Fetch profile picture on mount
+  useEffect(() => {
+    async function loadProfile() {
+      if (!token) return;
+      try {
+        const data = await fetchUserProfile(token);
+        setProfilePicUrl(data.profilePictureUrl || null);
+      } catch (error) {
+        console.error("Failed to load profile picture", error);
+        setProfilePicUrl(null);
+      }
+    }
+    loadProfile();
+  }, [token]);
 
   // Close menu if clicked outside
   useEffect(() => {
@@ -28,13 +53,24 @@ export default function ProfileMenu() {
         className="w-8 h-8 rounded-full overflow-hidden border border-gray-300 cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        <Image
-          src="/shopOwner/owner1.jpg" // ✅ Replace with your actual profile image path
-          alt="Profile"
-          width={32}
-          height={32}
-          className="object-cover"
-        />
+        {profilePicUrl ? (
+          <Image
+            src={profilePicUrl}
+            alt="Profile"
+            width={32}
+            height={32}
+            className="object-cover"
+          />
+        ) : (
+          // Fallback static image if no profile pic
+          <Image
+            src="/shopOwner/owner1.jpg"
+            alt="Profile"
+            width={32}
+            height={32}
+            className="object-cover"
+          />
+        )}
       </div>
 
       {/* Dropdown Menu */}
@@ -56,9 +92,9 @@ export default function ProfileMenu() {
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
               onClick={() => {
-                localStorage.removeItem("authToken"); // 🔐 Remove login token
-                setOpen(false); // 🔒 Close dropdown
-                window.location.href = "/"; // 🏠 Go to home (refresh triggers HeaderGuest)
+                localStorage.removeItem("authToken");
+                setOpen(false);
+                window.location.href = "/";
               }}
             >
               <LogOut size={16} />
