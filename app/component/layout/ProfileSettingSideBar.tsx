@@ -17,22 +17,19 @@ const SidebarMenu: React.FC = () => {
         <h3 className="text-teal-600 font-semibold mb-2">Manage My Account</h3>
         <ul className="text-gray-600 space-y-1">
           <li>
-           
             <Link
-              href="/pages/setting/MyProfile"
+              href="/pages/myprofile"
               className={`block px-3 py-2 rounded ${
-                isActive("/pages/setting/MyProfile")
+                isActive("/pages/myprofile")
                   ? "text-white bg-teal-600 font-semibold"
                   : "hover:text-teal-600"
               }`}
             >
               My Profile
             </Link>
-            
           </li>
           <li>
             <Link
-          
               href="/pages/setting/AddressBook"
               className={`block px-3 py-2 rounded ${
                 isActive("/pages/setting/AddressBook")
@@ -56,7 +53,6 @@ const SidebarMenu: React.FC = () => {
             </Link>
           </li>
           <li>
-            
             <Link
               href="/account/points"
               className={`block px-3 py-2 rounded ${
@@ -76,7 +72,6 @@ const SidebarMenu: React.FC = () => {
         <h3 className="font-bold mb-2">My Orders</h3>
         <ul className="text-gray-600 space-y-1">
           <li>
-           
             <Link
               href="/orders/returns"
               className={`block px-3 py-2 rounded ${
@@ -87,7 +82,6 @@ const SidebarMenu: React.FC = () => {
             >
               My Returns
             </Link>
-            
           </li>
           <li>
             <Link
@@ -107,7 +101,6 @@ const SidebarMenu: React.FC = () => {
       {/* My Reviews Section */}
       <div className="mb-6">
         <h3 className="font-bold mb-2">
-         
           <Link
             href="/reviews"
             className={`hover:text-teal-600 px-3 py-2 rounded block ${
@@ -116,14 +109,12 @@ const SidebarMenu: React.FC = () => {
           >
             My Reviews
           </Link>
-        
         </h3>
       </div>
 
       {/* My Wishlist & Followed Stores */}
       <div>
         <h3 className="font-bold mb-2">
-      
           <Link
             href="/wishlist"
             className={`hover:text-teal-600 px-3 py-2 rounded block ${
@@ -134,7 +125,6 @@ const SidebarMenu: React.FC = () => {
           >
             My Wishlist &amp; Followed Stores
           </Link>
-          
         </h3>
       </div>
     </nav>

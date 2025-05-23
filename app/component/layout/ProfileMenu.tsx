@@ -53,7 +53,6 @@ export default function ProfileMenu() {
         className="w-8 h-8 rounded-full overflow-hidden border border-gray-300 cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        
         {profilePicUrl ? (
           <Image
             src={profilePicUrl}
@@ -93,7 +92,6 @@ export default function ProfileMenu() {
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
               onClick={() => {
-              
                 localStorage.removeItem("authToken");
                 setOpen(false);
                 window.location.href = "/";

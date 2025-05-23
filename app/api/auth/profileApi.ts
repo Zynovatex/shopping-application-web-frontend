@@ -32,13 +32,23 @@ export async function updateProfile(data: ProfileData) {
     token = localStorage.getItem("authToken") ?? "";
   }
 
-  const response = await axios.put(`${BASE_URL}/user/profile`, data, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await axios.put(`${BASE_URL}/user/profile`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.log("Error with updating profile.");
+    if (error.response?.status === 403) {
+      throw new Error(
+        "Access denied. You do not have permission to view this profile."
+      );
+    }
+  }
 }
 
 export interface DisplayProfileData {
@@ -53,20 +63,41 @@ export interface DisplayProfileData {
  * Fetch user profile data from backend
  * @param token JWT auth token for Authorization header
  */
-export async function getUserProfile(token: string): Promise<ProfileData> {
-  const response = await axios.get(`${BASE_URL}/user/profile`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
+export async function getUserProfile(token: string) {
+  try {
+    const response = await axios.get(`${BASE_URL}/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.log("Error with getting profile.");
+    if (error.response?.status === 403) {
+      throw new Error(
+        "Access denied. You do not have permission to view this profile."
+      );
+    }
+  }
 }
 
 export async function fetchUserProfile(token: string) {
-  const response = await axios.get(`${BASE_URL}/user/profile`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data; // expecting object with profilePictureUrl (and other info)
+  try {
+    const response = await axios.get(`${BASE_URL}/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data; // expecting object with profilePictureUrl (and other info)
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.log("Error with fetching profile.");
+    if (error.response?.status === 403) {
+      throw new Error(
+        "Access denied. You do not have permission to view this profile."
+      );
+    }
+  }
 }
