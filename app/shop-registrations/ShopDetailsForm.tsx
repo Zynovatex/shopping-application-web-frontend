@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { uploadFileToFirebase } from "../api/auth/firebaseUpload";
@@ -12,7 +13,7 @@ interface ShopDetailsFormProps {
   deliveryAvailable: boolean;
   description: string;
   shopImages: string[];
-  onChange: (field: string, value: any) => void;
+  onChange: (field: string, value: string | boolean | string[]) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -35,7 +36,7 @@ const ShopDetailsForm: React.FC<ShopDetailsFormProps> = ({
 
   const handleMultipleUpload = async (files: File[]) => {
     const uploadedURLs: string[] = [];
-    for (let file of files) {
+    for (const file of files) {
       const url = await uploadFileToFirebase(file, "shopImages");
       uploadedURLs.push(url);
     }

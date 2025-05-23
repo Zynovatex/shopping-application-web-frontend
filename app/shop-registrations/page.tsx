@@ -63,9 +63,9 @@ const ShopRegistrationPage: React.FC = () => {
   // Final save on last form
   const handleFinalSave = async () => {
     try {
-      // const token = localStorage.getItem("authToken") || "";
-      const token =
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZXdhZ2FtYXNhbmR1bmkyQGdtYWlsLmNvbSIsImlhdCI6MTc0NzgyMzY5MCwiZXhwIjoxNzQ3ODI3MjkwfQ.e-GUi3jluSgclAFr-KbDYDG4MULZrxI0Js50IQz7nQY";
+      const token = localStorage.getItem("authToken") || "";
+      // const token =
+      //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZXdhZ2FtYXNhbmR1bmkyQGdtYWlsLmNvbSIsImlhdCI6MTc0NzgyMzY5MCwiZXhwIjoxNzQ3ODI3MjkwfQ.e-GUi3jluSgclAFr-KbDYDG4MULZrxI0Js50IQz7nQY";
 
       const response = await registerShop(shopData, token);
       console.log("Shop registration successful:", response);
